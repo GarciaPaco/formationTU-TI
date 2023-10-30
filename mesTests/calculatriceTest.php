@@ -27,11 +27,14 @@ class CalculatriceTest extends TestCase {
         $calculatrice = new Calculatrice();
         $result = $calculatrice->divide(20, 4);
         $this->assertEquals(5, $result);
-        $this->expectException(CustomException::class);
-        $calculatrice->divide(20, 0);
 
 
     }
-
+     public function testDivisionByZero()
+     {
+         $calculatrice = new Calculatrice();
+         $this->expectException(CustomException::class);
+         $calculatrice->divide(20, 0);
+     }
 
 }
