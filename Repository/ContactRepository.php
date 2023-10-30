@@ -2,12 +2,38 @@
 
 namespace Repository;
 require_once "Entity/Contact.php";
+require_once "mesClass/CountErrorException.php";
 use PDO;
 use Exception;
 use Entity\Contact;
-use PDOException;
 class ContactRepository
 {
+    public function findAll(): array
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->query("SELECT * FROM contact");
+        return $query->fetchAll();
+    }
+
+    public function count(): int
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->query("SELECT COUNT(*) FROM contact");
+        $total = $query->fetchColumn();
+        return $total;
+    }
+
+    public function compareCount(int $firstCount, int $secondCount)
+    {
+        if ($secondCount == $firstCount +1) {
+            return "L'insertion semble avoir fonctionner, le nombre de ligne est passé de $firstCount à $secondCount";
+        }
+        throw new Exception\CountErrorException();
+    }
+
+
  public function add(Contact $contact)
  {
     $pdo = $this->connectToDatabase();
@@ -19,7 +45,6 @@ class ContactRepository
         'email' => $contact->getEmail()
     ]);
 }
-
 
     public function delete()
     {
