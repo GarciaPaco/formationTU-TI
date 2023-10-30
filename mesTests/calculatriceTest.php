@@ -1,7 +1,9 @@
 <?php
 require 'mesClass/calculatrice.php';
-use PHPUnit\Framework\TestCase;
+require  'mesClass/CustomException.php';
 
+use Exception\CustomException;
+use PHPUnit\Framework\TestCase;
 class CalculatriceTest extends TestCase {
 
     public function testAdd() {
@@ -25,11 +27,11 @@ class CalculatriceTest extends TestCase {
         $calculatrice = new Calculatrice();
         $result = $calculatrice->divide(20, 4);
         $this->assertEquals(5, $result);
+        $this->expectException(CustomException::class);
+        $calculatrice->divide(20, 0);
+
+
     }
 
-    // Test pour division par zéro
-    public function testDivisionParZero() {
-        $calculatrice = new Calculatrice();
-        $calculatrice->divide(20, 0);
-    }
+
 }
