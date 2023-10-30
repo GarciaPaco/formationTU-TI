@@ -31,6 +31,5 @@ class CalculatriceTest extends TestCase {
     public function testDivisionParZero() {
         $calculatrice = new Calculatrice();
         $calculatrice->divide(20, 0);
-
     }
 }
