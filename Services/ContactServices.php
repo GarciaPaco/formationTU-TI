@@ -24,10 +24,10 @@ class ContactServices
 
 
 
-    public function deleteContact()
+    public function deleteContact(int $id)
     {
         $contactRepository = new ContactRepository();
-        $deleteToDatabase = $contactRepository->delete(7);
+        $deleteToDatabase = $contactRepository->delete($id);
         return $deleteToDatabase;
     }
 //
@@ -48,5 +48,12 @@ class ContactServices
         $contactRepository = new ContactRepository();
         $allContact = $contactRepository->findAll();
         return $allContact;
+    }
+
+    public function findOneById(int $id)
+    {
+        $contactRepository = new ContactRepository();
+        $contact = $contactRepository->getContactById($id);
+        return $contact;
     }
 }
