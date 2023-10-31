@@ -15,16 +15,11 @@ class ContactServices
     {
         $contactRepository = new ContactRepository();
         $contact = new Contact();
-        $firstCount = $contactRepository->count();
-        var_dump($firstCount);
         $contact->setNom($nom);
         $contact->setPrenom($prenom);
         $contact->setEmail($email);
         $inserToDatabase = $contactRepository->add($contact);
-        $secondCount = $contactRepository->count();
-        var_dump($secondCount);
-        $countFinal = $contactRepository->compareCount($firstCount, $secondCount);
-        return $inserToDatabase & $countFinal;
+        return $inserToDatabase;
     }
 
 

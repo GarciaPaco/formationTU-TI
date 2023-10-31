@@ -32,14 +32,6 @@ class ContactRepository
         return $total;
     }
 
-    public function compareCount(int $firstCount, int $secondCount)
-    {
-        if ($secondCount == $firstCount + 1) {
-            return "L'insertion semble avoir fonctionner, le nombre de ligne est passé de $firstCount à $secondCount";
-        }
-    // throw new Exception\CountErrorException();
-    }
-
  public function add(Contact $contact)
  {
     $pdo = $this->connectToDatabase();

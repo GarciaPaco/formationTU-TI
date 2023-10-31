@@ -7,38 +7,45 @@ require_once "mesClass/CountErrorException.php";
 
 use Services\ContactServices;
 use PHPUnit\Framework\TestCase;
+use Repository\ContactRepository;
 
 class ContactTest extends TestCase
 {
+    private ContactServices $contactServices;
+    private ContactRepository $contactRepository;
+    public function setUp(): void
+    {
+        $this->contactServices = new ContactServices();
+        $this->contactRepository = new ContactRepository();
+    }
     public function testCreateContact()
     {
-        $contactService = new ContactServices;
-        // $this->expectException(\Exception\CountErrorException::class);
-        $result = $contactService->createContact("Doe", "John", "johndoe@mail.com");
+        $firstCount = $this->contactRepository->count();
+        $result = $this->contactServices->createContact("Doe", "John", "johndoe@mail.com");
+        $secondCount = $this->contactRepository->count();
         $this->assertTrue($result);
+        $this->assertEquals($firstCount + 1, $secondCount);
     }
 
 
     public function testDeleteContact()
     {
-        $contactService = new ContactServices;
-        $result = $contactService->deleteContact();
+        $result = $this->contactServices->deleteContact();
         $this->assertTrue($result);
     }
 
     public function testGetLastRow()
     {
-        $contactService = new ContactServices;
-        $result = $contactService->getLastRow();
+        $result = $this->contactServices->getLastRow();
         $this->assertIsArray($result);
     }
 
     public function testDisplayAllContact()
     {
-        $contactServices = new ContactServices;
-        $result = $contactServices->findAll();
+        $result = $this->contactServices->findAll();
         $this->assertIsArray($result);
     }
+
 
 
 }
