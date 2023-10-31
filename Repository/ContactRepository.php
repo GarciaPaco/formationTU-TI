@@ -16,6 +16,13 @@ class ContactRepository
         return $query->fetchAll();
     }
 
+    public function getLastRow(): array
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->query("SELECT * FROM contact ORDER BY id DESC LIMIT 1");
+        return $query->fetchAll();
+    }
     public function count(): int
     {
         $pdo = $this->connectToDatabase();
@@ -27,12 +34,11 @@ class ContactRepository
 
     public function compareCount(int $firstCount, int $secondCount)
     {
-        if ($secondCount == $firstCount +1) {
+        if ($secondCount == $firstCount + 1) {
             return "L'insertion semble avoir fonctionner, le nombre de ligne est passé de $firstCount à $secondCount";
         }
-        throw new Exception\CountErrorException();
+    // throw new Exception\CountErrorException();
     }
-
 
  public function add(Contact $contact)
  {
@@ -46,15 +52,14 @@ class ContactRepository
     ]);
 }
 
-    public function delete()
+    public function delete(int $id)
     {
         $pdo = $this->connectToDatabase();
         $this->createTable($pdo);
-        $query = $pdo->prepare("DELETE contact WHERE id = :id");
+        $query = $pdo->prepare("DELETE FROM contact WHERE id = :id");
         return $query->execute([
-            'id' => 7
+            'id' => $id
         ]);
-
     }
 
     private function connectToDatabase(): PDO
