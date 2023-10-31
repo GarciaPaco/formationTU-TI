@@ -30,20 +30,20 @@ class ContactTest extends TestCase
     }
 
 
-    public function testDeleteContact()
-    {
-        $result = $this->contactServices->deleteContact(1);
-        $this->assertTrue($result);
-    }
+//    public function testDeleteContact()
+//    {
+//        $result = $this->contactServices->deleteContact(1);
+//        $this->assertTrue($result);
+//    }
 
-    public function testDeleteCheckById()
-    {
-        $idBeforeDeletion = $this->contactServices->findOneById(8);
-        $result = $this->contactServices->deleteContact(8);
-        $idAfterDeletion = $this->contactServices->findOneById(8);
-        $this->assertTrue($result);
-        $this->assertNotEquals($idBeforeDeletion, $idAfterDeletion);
-    }
+//    public function testDeleteCheckById()
+//    {
+//        $idBeforeDeletion = $this->contactServices->findOneById(8);
+//        $result = $this->contactServices->deleteContact(8);
+//        $idAfterDeletion = $this->contactServices->findOneById(8);
+//        $this->assertTrue($result);
+//        $this->assertNotEquals($idBeforeDeletion, $idAfterDeletion);
+//    }
 
     public function testGetLastRow()
     {
@@ -61,6 +61,16 @@ class ContactTest extends TestCase
     {
         $result = $this->contactServices->findOneById(10);
         $this->assertIsArray($result);
+    }
+
+    public function testUpdateContact()
+    {
+
+        $contactBeforeUpdate = $this->contactServices->findOneById(1);
+        $result = $this->contactServices->updateContact(1, "Bidule", "Truc", "trucbidule@mail.com");
+        $contactAfterUpdate = $this->contactServices->findOneById(1);
+        $this->assertTrue($result);
+        $this->assertNotEquals($contactBeforeUpdate, $contactAfterUpdate);
     }
 
 

@@ -30,11 +30,39 @@ class ContactServices
         $deleteToDatabase = $contactRepository->delete($id);
         return $deleteToDatabase;
     }
-//
-//    public function updateContact(string $nom, string $prenom, string $email)
-//    {
-//
-//    }
+
+    public function updateContact(
+        int     $id,
+        string  $nom,
+        string  $prenom,
+        string  $email
+    )
+    {
+        if (!$contact = $this->findOneById($id)) {
+            throw new CountErrorException();
+        }
+//        $oldContact = clone $contact;
+        if ($nom) {
+            $contact->setNom($nom);
+        }
+        if ($prenom) {
+            $contact->setPrenom($prenom);
+        }
+        if ($email && !filter_var(
+                $email,
+                FILTER_VALIDATE_EMAIL
+            )) {
+            throw new \InvalidArgumentException("Email invalide");
+        }
+        if ($email) {
+            $contact->setEmail($email);
+        }
+//        if ($oldContact == $contact) {
+//            throw new \InvalidArgumentException("Aucune modification n'a été effectuée");
+//        }
+        $contactRepository = new ContactRepository();
+        return $contactRepository->updateContact($contact);
+    }
 
     public function getLastRow()
     {

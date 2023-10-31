@@ -1,5 +1,4 @@
 <?php
-
 namespace Entity;
 
 class Contact
@@ -7,8 +6,15 @@ class Contact
     private string $nom;
     private string $prenom;
     private string $email;
+    private int $id;
 
-
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     /**
      * @return string

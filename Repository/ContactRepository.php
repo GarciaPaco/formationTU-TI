@@ -90,4 +90,18 @@ class ContactRepository
             email VARCHAR(250) NOT NULL
             )");
     }
+
+    public function updateContact(Contact $contact)
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->prepare("UPDATE contact SET nom = :nom, prenom = :prenom, email = :email WHERE id = :id");
+        return $query->execute([
+            'id' => $contact->getId(),
+            'nom' => $contact->getNom(),
+            'prenom' => $contact->getPrenom(),
+            'email' => $contact->getEmail()
+        ]);
+    }
+
 }
