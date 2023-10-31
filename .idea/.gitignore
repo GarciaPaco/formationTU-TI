@@ -6,3 +6,13 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/sonarlint/issuestore/2/c/2c4f3d3583143f7ff81697c44e4359dc62617b66
+/sonarlint/securityhotspotstore/2/c/2c4f3d3583143f7ff81697c44e4359dc62617b66
+/sonarlint/issuestore/3/9/3957b91a0d8450cea0115cfd5af69eac90d75897
+/sonarlint/securityhotspotstore/3/9/3957b91a0d8450cea0115cfd5af69eac90d75897
+/sonarlint/issuestore/5/3/5320c0a47bc28a729454749f1be344d75267f88c
+/sonarlint/securityhotspotstore/5/3/5320c0a47bc28a729454749f1be344d75267f88c
+/sonarlint/issuestore/f/f/fffa4ceb797beabfa21e8b5494e5edced71ef722
+/sonarlint/securityhotspotstore/f/f/fffa4ceb797beabfa21e8b5494e5edced71ef722
+/sonarlint/issuestore/index.pb
+/sonarlint/securityhotspotstore/index.pb
