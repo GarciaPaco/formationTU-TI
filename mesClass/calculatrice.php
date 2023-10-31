@@ -1,5 +1,5 @@
 <?php
-
+use Exception\DivisionByZeroException;
 class Calculatrice
 {
     public int $first;
@@ -24,11 +24,9 @@ class Calculatrice
     public function divide(int $first, int $second): int
     {
         if ($second === 0) {
-            throw new Exception('Division par zéro impossible');
+            throw new \Exception\DivisionByZeroException();
         }
         return $first / $second;
 
     }
-
-
 }
