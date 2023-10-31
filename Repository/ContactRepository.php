@@ -3,7 +3,8 @@
 namespace Repository;
 require_once "Entity/Contact.php";
 require_once "mesClass/CountErrorException.php";
-
+require_once "EmailServices/Email.php";
+use EmailServices\EmailServices;
 use PDO;
 use Exception;
 use Entity\Contact;
@@ -56,7 +57,7 @@ class ContactRepository
         $query->execute([
             'id' => $id
         ]);
-        return $query->fetch();
+        return $query->fetchObject(Contact::class);
     }
     public function delete(int $id)
     {

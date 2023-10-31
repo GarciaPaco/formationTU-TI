@@ -1,4 +1,4 @@
 
-:php:S113"'Add a new line at the end of this file.8ìé©…¸1
-?php:S125"Remove this commented out code.(½Ò¢ªøÿÿÿÿ8ìé©…¸1
-r	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(§Ý–Áþÿÿÿÿ8ìé©…¸1
+z	php:S1488""^Immediately return this expression instead of assigning it to the temporary variable "$total".(îÉ „8„¨±¨¸1
+r	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(§Ý–Áþÿÿÿÿ8„¨±¨¸1
+m	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(¸ªìÚ8„¨±¨¸1
