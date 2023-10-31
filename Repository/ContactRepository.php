@@ -3,9 +3,11 @@
 namespace Repository;
 require_once "Entity/Contact.php";
 require_once "mesClass/CountErrorException.php";
+
 use PDO;
 use Exception;
 use Entity\Contact;
+
 class ContactRepository
 {
     public function findAll(): array
@@ -23,6 +25,7 @@ class ContactRepository
         $query = $pdo->query("SELECT * FROM contact ORDER BY id DESC LIMIT 1");
         return $query->fetchAll();
     }
+
     public function count(): int
     {
         $pdo = $this->connectToDatabase();
@@ -32,18 +35,29 @@ class ContactRepository
         return $total;
     }
 
- public function add(Contact $contact)
- {
-    $pdo = $this->connectToDatabase();
-    $this->createTable($pdo);
-    $query = $pdo->prepare("INSERT INTO contact (nom, prenom, email) VALUES (:nom, :prenom, :email)");
-    return $query->execute([
-        'nom' => $contact->getNom(),
-        'prenom' => $contact->getPrenom(),
-        'email' => $contact->getEmail()
-    ]);
-}
+    public function add(Contact $contact)
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->prepare("INSERT INTO contact (nom, prenom, email) VALUES (:nom, :prenom, :email)");
+        return $query->execute([
+            'nom' => $contact->getNom(),
+            'prenom' => $contact->getPrenom(),
+            'email' => $contact->getEmail()
+        ]);
 
+    }
+
+    public function getContactById(int $id)
+    {
+        $pdo = $this->connectToDatabase();
+        $this->createTable($pdo);
+        $query = $pdo->prepare("SELECT * FROM contact WHERE id = :id");
+        $query->execute([
+            'id' => $id
+        ]);
+        return $query->fetch();
+    }
     public function delete(int $id)
     {
         $pdo = $this->connectToDatabase();
@@ -57,12 +71,12 @@ class ContactRepository
     private function connectToDatabase(): PDO
     {
         try {
-            $pdo = new PDO('sqlite:'.dirname(__FILE__).'database.sqlite');
+            $pdo = new PDO('sqlite:' . dirname(__FILE__) . 'database.sqlite');
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
         } catch (Exception $e) {
-            echo "Impossible d'accéder à la base de données SQLite : ".$e->getMessage();
+            echo "Impossible d'accéder à la base de données SQLite : " . $e->getMessage();
             die();
         }
     }

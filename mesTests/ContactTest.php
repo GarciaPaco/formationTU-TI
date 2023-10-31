@@ -13,11 +13,13 @@ class ContactTest extends TestCase
 {
     private ContactServices $contactServices;
     private ContactRepository $contactRepository;
+
     public function setUp(): void
     {
         $this->contactServices = new ContactServices();
         $this->contactRepository = new ContactRepository();
     }
+
     public function testCreateContact()
     {
         $firstCount = $this->contactRepository->count();
@@ -28,10 +30,21 @@ class ContactTest extends TestCase
     }
 
 
-    public function testDeleteContact()
+//    public function testDeleteContact()
+//    {
+//        $result = $this->contactServices->deleteContact(9);
+//        $this->assertTrue($result);
+//    }
+
+    public function testDeleteCheckById()
     {
-        $result = $this->contactServices->deleteContact();
+        $idBeforeDeletion = $this->contactRepository->getContactById(8);
+        $result = $this->contactServices->deleteContact(8);
+        $idAfterDeletion = $this->contactRepository->getContactById(8);
+        var_dump($idBeforeDeletion);
+        var_dump($idAfterDeletion);
         $this->assertTrue($result);
+        $this->assertNotEquals($idBeforeDeletion, $idAfterDeletion);
     }
 
     public function testGetLastRow()
@@ -46,6 +59,12 @@ class ContactTest extends TestCase
         $this->assertIsArray($result);
     }
 
+    public function testFindOneById()
+    {
+        $result = $this->contactServices->findOneById(10);
+        var_dump($result);
+        $this->assertIsArray($result);
+    }
 
 
 }
