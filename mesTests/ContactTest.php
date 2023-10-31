@@ -30,19 +30,17 @@ class ContactTest extends TestCase
     }
 
 
-//    public function testDeleteContact()
-//    {
-//        $result = $this->contactServices->deleteContact(9);
-//        $this->assertTrue($result);
-//    }
+    public function testDeleteContact()
+    {
+        $result = $this->contactServices->deleteContact(1);
+        $this->assertTrue($result);
+    }
 
     public function testDeleteCheckById()
     {
-        $idBeforeDeletion = $this->contactRepository->getContactById(8);
+        $idBeforeDeletion = $this->contactServices->findOneById(8);
         $result = $this->contactServices->deleteContact(8);
-        $idAfterDeletion = $this->contactRepository->getContactById(8);
-        var_dump($idBeforeDeletion);
-        var_dump($idAfterDeletion);
+        $idAfterDeletion = $this->contactServices->findOneById(8);
         $this->assertTrue($result);
         $this->assertNotEquals($idBeforeDeletion, $idAfterDeletion);
     }
@@ -62,7 +60,6 @@ class ContactTest extends TestCase
     public function testFindOneById()
     {
         $result = $this->contactServices->findOneById(10);
-        var_dump($result);
         $this->assertIsArray($result);
     }
 
